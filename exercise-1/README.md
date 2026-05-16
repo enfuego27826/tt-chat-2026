@@ -141,15 +141,33 @@ if(argc > 2){
 
 - What is happening in line 26 of `tcp-echo-client.cc`? 
   `if (inet_pton(AF_INET, kServerAddress.c_str(), &address.sin_addr) <= 0) {`
+- Answer: We are basically converting the readable IP address format into binary format that the networking API will understand using the function `inet_pton`, `AF_INET` just tells that its a IPv4 address, `kserverAddress.c_str()` converts the `std::string` into a classic c style string and `&address.sin_addr` provides the memory location where the converted IP address will be stored. If `inet_pton` returns `0` or `-1`, the conversion basically failed.
+  
 - What is happening in line 31 of `tcp-echo-client.cc`?
   `if (connect(my_sock, (sockaddr *)&address, sizeof(address)) < 0) {`
+- Answer: Here we are basically asking the OS to connect the socket to a remote server specified by `address` using the `connect` system call. `(sockaddr *)&address` casts the IPv4 socket struct into a generic socket struct because `connect` has to work with multiple socket types. `sizeof(address)` tells the OS the size of the structure being passed. If the return value is `< 0`, the connection basically failed.
+    
 - What is the difference between a pointer and a reference?
+- Answer: A pointer stores the memory address of another object and can be reassigned, be `nullptr` and support pointer arithmetic. A reference on the other hand is just an alias to another object and cannot be reseated or null. Internally a reference may behave somewhat like a constant pointer (`int *const ri = &i`). References are generally cleaner/safer while pointers are more flexible.
+  
 - When is it better to use a pointer?
+- Answer: Pointers are useful when an object may or may not exist (`nullptr`), when working with dynamic memory/low level memory or when working with C APIs (like we do in this exercise) and data structures like linked lists and trees.
+  
 - When is it better to use a reference?
+- Answer: References are better when an object must always exist and we simply want to alias/pass it around without copying. They are generally cleaner and safer than pointers since they cannot be null or reseated. They are heavily used in operator overloading/other functions to avoid unneccessary copying.
+  
 - What is the difference between `std::string` and a C-style string?
+- Answer: `std::string` is a proper C++ class which manages memory automatically and provides useful operations like concatenation, resizing, etc.. A C-style string is just a null terminated character array and is more low level but it is error prone as well.
+  
 - What type is a C-style string?
+  
+- Its usually represented as `char *` or `const char *` if you want a const c style string.
+
 - What happens when you iterate a pointer?
+- Answer: Iterating a pointer moves it forward in memory according to the size of the type it points to. For example incrementing an `int*` moves it by `sizeof(int)` bytes.
+  
 - What are the most important safety tips to know when using pointers?
+- We should initialize them properly and avoid dereferencing invalid/null pointers. Also we should be careful about dangling pointers and out of bound memory access.
 
 ## Learn Basics of Creating a C++ Project in Your IDE
 

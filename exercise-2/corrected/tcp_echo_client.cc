@@ -139,7 +139,6 @@ int main(int argc, char *argv[]) {
     return -1;
   }
 
-
   if(!connect_to_server(my_socket, *server_address)){
     close(my_socket);
     std::cerr << "Connection failed\n";

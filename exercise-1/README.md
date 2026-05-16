@@ -172,6 +172,7 @@ if(argc > 2){
 ## Learn Basics of Creating a C++ Project in Your IDE
 
 - How do you compile and run your project in your IDE?
+- Answer: In VS Code for smaller projects we can directly compile and run files using terminal commands/tasks like `g++ main.cc -o main && ./main` or the command for the language you are using. For larger projects it is usually better to use build systems like `make` or `cmake` and configure VS Code debugger around them.
 
 ## Improving Interactions with LLMs
 

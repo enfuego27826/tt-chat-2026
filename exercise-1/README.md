@@ -58,7 +58,7 @@ close it.
 - Answer:  `-Wall -Wextra`, `-g`, `-fsanitize=address`, `-O0` as explained earlier that they do the work which is crucial for debugging. Also include the version of c++ you are using for example `-std=c++20`.
 
 - What about for release?
-- In a release build we mainly focus on performance and efficiency of the final executable. Common flags include optimizations like `-O2` or `-O3` depending on the use case, and `-DNDEBUG` which disables debug assertions. Even though release builds are optimized, sometimes we may still include `-g` so that if users encounter bugs in production, we still have symbol information available for profiling and debugging tools.
+- We might use optimizations flags like `-O2` or `-O3` depending on the use case, and `-DNDEBUG` which disables debug assertions. Even though release builds are optimized, sometimes we may still include `-g` so that if users encounter bugs in production, we still have symbol information available for profiling and debugging tools.
 
 - What other kinds of build types are useful?
 - Except these builds, there are several builds that are used. For example RelWithDebInfo is commonly used because it combines optimizations (-O2) with debug symbols (-g) which helps in profiling and debugging performance issues in near production environments. Sanitizer builds using flags like `-fsanitize=address` and `-fsanitize=undefined` are extremely useful for detecting memory corruption, invalid accesses and undefined behavior during development. Coverage builds using `--coverage` help measure how much of the codebase is actually being tested. There are also profiling builds which are compiled specifically for performance analysis tools like gprof or perf.

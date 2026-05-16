@@ -52,16 +52,16 @@ close it.
 - Answer: In debug version our main focus is debugging, diagonistics and correctness of the program. We might not want to include compiler optimizations here since they do reorder instructions and as a result we might not be able to model behavior of certain variables which is crucial for debugging. In a release build our main focus is performance now that we have tested everything and we are sure of stuff, but wait there's a catch! There can still be a few bugs, so we might want to use `-g`, so that if a user faces a bug in a certain situation (which we clearly weren't able to model in test!), we can use those symbol informations for debugging using various debugging tools.
   
 - What are the tradeoffs between debug and release versions?
-- I would say the main tradeoff between them is debuggable-ity and performance. Debug builds are designed to help with developement/debugging without optimizations, enabling assertions and tracking/diagonising symbols/variables which makes it easier to track program state and variables but this also makes the program slower in comparison. Release builds on the other hand focus on performance and efficiency by enabling compiler optimizations (like `O2` or `O3` depending on the use case) and removing and debugging harnesses we had earlier resulting in smaller binary executables. The downside is that release builds this way get really harder to debug since optimization may reorder instructions, inline functions, etc. which make it harder to trace program behavior (because our mental model of the program and what is being executed clearly becomes way different!).
+- Answer: I would say the main tradeoff between them is debuggable-ity and performance. Debug builds are designed to help with developement/debugging without optimizations, enabling assertions and tracking/diagonising symbols/variables which makes it easier to track program state and variables but this also makes the program slower in comparison. Release builds on the other hand focus on performance and efficiency by enabling compiler optimizations (like `O2` or `O3` depending on the use case) and removing and debugging harnesses we had earlier resulting in smaller binary executables. The downside is that release builds this way get really harder to debug since optimization may reorder instructions, inline functions, etc. which make it harder to trace program behavior (because our mental model of the program and what is being executed clearly becomes way different!).
   
 - What arguments would you use in a debug build?
 - Answer:  `-Wall -Wextra`, `-g`, `-fsanitize=address`, `-O0` as explained earlier that they do the work which is crucial for debugging. Also include the version of c++ you are using for example `-std=c++20`.
 
 - What about for release?
-- We might use optimizations flags like `-O2` or `-O3` depending on the use case, and `-DNDEBUG` which disables debug assertions. Even though release builds are optimized, sometimes we may still include `-g` so that if users encounter bugs in production, we still have symbol information available for profiling and debugging tools.
+- Answer: We might use optimizations flags like `-O2` or `-O3` depending on the use case, and `-DNDEBUG` which disables debug assertions. Even though release builds are optimized, sometimes we may still include `-g` so that if users encounter bugs in production, we still have symbol information available for profiling and debugging tools.
 
 - What other kinds of build types are useful?
-- Except these builds, there are several builds that are used. For example RelWithDebInfo is commonly used because it combines optimizations (-O2) with debug symbols (-g) which helps in profiling and debugging performance issues in near production environments. Sanitizer builds using flags like `-fsanitize=address` and `-fsanitize=undefined` are extremely useful for detecting memory corruption, invalid accesses and undefined behavior during development. Coverage builds using `--coverage` help measure how much of the codebase is actually being tested. There are also profiling builds which are compiled specifically for performance analysis tools like gprof or perf.
+- Answer: Except these builds, there are several builds that are used. For example RelWithDebInfo is commonly used because it combines optimizations (-O2) with debug symbols (-g) which helps in profiling and debugging performance issues in near production environments. Sanitizer builds using flags like `-fsanitize=address` and `-fsanitize=undefined` are extremely useful for detecting memory corruption, invalid accesses and undefined behavior during development. Coverage builds using `--coverage` help measure how much of the codebase is actually being tested. There are also profiling builds which are compiled specifically for performance analysis tools like gprof or perf.
 
 ## Learn Basics of Make
 
@@ -69,18 +69,31 @@ close it.
 - [Quickstart tutorial to make](https://makefiletutorial.com/) - Learn make 
   fundamentals with practical examples and common patterns.
 - How else can you learn about make?
+- Answer: Googling docs/tutorials is always a good way to start, but I personally think the best way to learn make is by actually using it in projects. I had previously used it in compiler assignments and small systems projects which helped me understand dependencies, targets and rebuild logic much better than just reading theory. Reading existing Makefiles, experimenting with small examples and using commands like make -n also helps a lot. 
+  
 - How can you tell if the resource you are using is correct?
+- Answer: I think first comes reliability of source, thats an important thing to look for. After this I believe the best way is to verify things practically rather following tutorials blindly. If the concepts explained in the resource actually match the behavior you observe while experimenting, then it is usually a good sign. Good resources also explain why something works instead of just giving commands to copy paste. Referring to official documentation/man pages and comparing multiple sources also helps avoid misinformation. These are the ways I prefer using to verify if the resource I am using is of good quality or not.
+
 - Create a makefile such that when you run `make` with no arguments, it will:
   - Create `build/` directory if it does not exist
   - Create executables **client** and **server** in `build/`, if needed
   - How does make know when it needs to rebuild the executables?
+  - Answer: make mainly uses timestamps of files to decide whether something needs to be rebuilt or not. If a dependency/source file is newer than the target executable, make understands that the executable is outdated and recompiles it. Otherwise it skips rebuilding which helps make builds much faster.
+    
   - Change your Makefile such that `make clean` will remove `build/` and all
     its contents
 - What are the most important command line arguments to learn for make?
+- Answer: Commands like make -j are good to know since they allow parallel builds and speed up compilation. That is very useful for large projects/codebases. make -n is useful for debugging Makefiles since it shows what commands would run without actually executing them. make clean is commonly used to remove generated build files and force a fresh rebuild. make -B can also be useful when we want to rebuild everything regardless of timestamps/dependencies.
+  
 - What are the most important directives to learn about in Makefile?
+- Answer: Understanding targets, dependencies and variables is probably the most important thing in make. Directives like .PHONY are useful because they tell make that a target is not an actual file. Pattern rules are also super useful since they help avoid repetitive compilation rules. Automatic variables like $@ and $< are also really important because they help us abstract rules in a cleaner way.
+  
 - What are the most important commands to implement in your Makefile?
+- Answer: Commands like all and clean are definitely the most important ones. all is usually the default target and builds everything required while clean removes generated build files for fresh rebuilds. Commands like debug, release, run or test are useful as per the use case.
+  
 - Which ones are essential, which ones are nice to haves?
-
+- Answer: Targets, dependencies, variables and commands like all and clean are essential because they are the main purpose of makefiles. Pattern rules, automatic variables, parallel builds and other commands are more like nice to haves initially, but they become really useful as projects become more complex.
+  
 ## Learn Basics of Git
 
 - Read through the code in `src/`

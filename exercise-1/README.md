@@ -86,7 +86,7 @@ close it.
 - Answer: Commands like make -j are good to know since they allow parallel builds and speed up compilation. That is very useful for large projects/codebases. make -n is useful for debugging Makefiles since it shows what commands would run without actually executing them. make clean is commonly used to remove generated build files and force a fresh rebuild. make -B can also be useful when we want to rebuild everything regardless of timestamps/dependencies.
   
 - What are the most important directives to learn about in Makefile?
-- Answer: Understanding targets, dependencies and variables is probably the most important thing in make. Directives like .PHONY are useful because they tell make that a target is not an actual file. Pattern rules are also super useful since they help avoid repetitive compilation rules. Automatic variables like $@ and $< are also really important because they help us abstract rules in a cleaner way.
+- Answer: Understanding targets, dependencies and variables is probably the most important thing in make. Directives like .PHONY are useful because they tell make that a target is not an actual file. Pattern rules are also super useful since they help avoid repetitive compilation rules. Automatic variables like `$@` and `$<` are also really important because they help us abstract rules in a cleaner way.
   
 - What are the most important commands to implement in your Makefile?
 - Answer: Commands like all and clean are definitely the most important ones. all is usually the default target and builds everything required while clean removes generated build files for fresh rebuilds. Commands like debug, release, run or test are useful as per the use case.

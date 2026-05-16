@@ -88,8 +88,7 @@ bool send_all(int sock, const std::string &message) {
   return true;
 }
 
-std::optional<std::string>
-read_all(int sock, char *buffer, int kBufferSize) {
+std::optional<std::string> read_all(int sock, char *buffer, int kBufferSize) {
   std::string received;
 
   while(true) {

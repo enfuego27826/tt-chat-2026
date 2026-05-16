@@ -43,12 +43,25 @@ close it.
 ## Learn Basics of g++ CLI
 
 - Compile the TCP client and server using `g++` from command line.
+- Answer: Compiled through g++ -Wall -g /src/tcp_echo_client.cc -o /build/client
+  
 - What are the most important command line arguments to learn for `g++`?
+- Answer: The flags and knowing what each of them does is super important to understand. Including the c++ version you are using is important as well (since the default version of your compiler might not be the one you intend to use), say if you are using c++ 20 - `-std=c++20`. For example `-Wall -Wextra` can help you show clearer warning which is really helpful in debugging and finding places where code could go wrong. Sanitizers like `-fsanitize=address` and `-fsanitize=undefined` are extremely useful during debugging. Address Sanitizer helps detect memory-related bugs such as buffer overflows and use after free errors, while UB Sanitizer helps catch undefined behavior like integer overflows, invalid shifts and other dangerous runtime issues. The optimization levels like `O0` `O1` `O3` and when to use what and since there are tradeoffs to each one of them and not naively using `O3` every time! (Optimization is a NP hard problem so you got to use some heuristics which aren't always useful!). `-g` helps with including symbols for debugging tools like gdb, etc..
+  
 - What is the difference between debug vs release versions?
+- Answer: In debug version our main focus is debugging, diagonistics and correctness of the program. We might not want to include compiler optimizations here since they do reorder instructions and as a result we might not be able to model behavior of certain variables which is crucial for debugging. In a release build our main focus is performance now that we have tested everything and we are sure of stuff, but wait there's a catch! There can still be a few bugs, so we might want to use `-g`, so that if a user faces a bug in a certain situation (which we clearly weren't able to model in test!), we can use those symbol informations for debugging using various debugging tools.
+  
 - What are the tradeoffs between debug and release versions?
+- I would say the main tradeoff between them is debuggable-ity and performance. Debug builds are designed to help with developement/debugging without optimizations, enabling assertions and tracking/diagonising symbols/variables which makes it easier to track program state and variables but this also makes the program slower in comparison. Release builds on the other hand focus on performance and efficiency by enabling compiler optimizations (like `O2` or `O3` depending on the use case) and removing and debugging harnesses we had earlier resulting in smaller binary executables. The downside is that release builds this way get really harder to debug since optimization may reorder instructions, inline functions, etc. which make it harder to trace program behavior (because our mental model of the program and what is being executed clearly becomes way different!).
+  
 - What arguments would you use in a debug build?
+- Answer:  `-Wall -Wextra`, `-g`, `-fsanitize=address`, `-O0` as explained earlier that they do the work which is crucial for debugging. Also include the version of c++ you are using for example `-std=c++20`.
+
 - What about for release?
+- In a release build we mainly focus on performance and efficiency of the final executable. Common flags include optimizations like `-O2` or `-O3` depending on the use case, and `-DNDEBUG` which disables debug assertions. Even though release builds are optimized, sometimes we may still include `-g` so that if users encounter bugs in production, we still have symbol information available for profiling and debugging tools.
+
 - What other kinds of build types are useful?
+- Except these builds, there are several builds that are used. For example RelWithDebInfo is commonly used because it combines optimizations (-O2) with debug symbols (-g) which helps in profiling and debugging performance issues in near production environments. Sanitizer builds using flags like `-fsanitize=address` and `-fsanitize=undefined` are extremely useful for detecting memory corruption, invalid accesses and undefined behavior during development. Coverage builds using `--coverage` help measure how much of the codebase is actually being tested. There are also profiling builds which are compiled specifically for performance analysis tools like gprof or perf.
 
 ## Learn Basics of Make
 

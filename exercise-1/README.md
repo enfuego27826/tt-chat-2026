@@ -178,11 +178,22 @@ if(argc > 2){
 
 - What is the most authoritative source of information about `socket()`
   from `<sys/socket.h>`?
+- Answer: The man pages (`man socket`) are usually the most authoritative/practical source for understanding `socket()` and related APIs.
+
 - What is the most authoritative source of information about the TCP and IP
   protocols?
+- Answer: RFC document published by IETF are the most authoritative source for TCP/IP.
+  
 - What is the most authoritative source of information about the C++
   programming language?
+- Answer: ISO C++ standard is the official authoritative source, while references like cppreference are practical resources.
+  
 - What information can you find about using Markdown when structuring prompts 
   to LLMs?
+- Answer: Markdown helps structure prompts more clearly using headings, lists, code blocks, etc., making instructions easier for both humans and LLMs to parse.
+  
 - What is the difference between LLM and AI?
+- Answer: AI is a subfield of CS whose main idea is to build systems that can simulate intelligent behavior, while an LLM (Large Language Model) is a specific type of AI focused on understanding/generating language.
+  
 - Is it grammatically correct in English to say "a LLM" or "an LLM"? Why?
+- an LLM in my opinion since you pronounce it like (el el m), just how you call an umbrella.

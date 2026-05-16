@@ -117,12 +117,25 @@ close it.
   `"hello message from the command prompt"` to the server
 - Commit your changes into git
 - What do all these headers do?
+- Answer: `<iostream>` provides stream objects like `cout` and `cin` (also `cerr`), `<string>` provides `std::string`, `<sys/socket.h>` contains socket API like `socket`, `connect`, `send`, `bind`, etc.. `<arpa/inet.h>` provides methods related to IP address conversion like `inet_pton` and byte order conversions. `<netinet/in.h>` provides structs like `sockaddr_in`. `<unistd.h>` provides system calls like `close`, `read`, `write`, etc.. `<sys/types.h>` gives types used by many system calls.
+  
 - How do you find out which part of the below code comes from which header?
-- How do you change the code so that you are sending messages to servers
-  other than localhost?
+- Answer: I do this by either checking docs/man pages or using IDE features (vs code provides such a feature). For example `man inet_pton` tells us which header defines the function/type/class/etc.. If you miss a header by chance, your compiler is always there to help you as they often hint at missing headers.
+  
+- How do you change the code so that you are sending messages to servers other than localhost?
+- Answer: We can do that by changing the variable `kServerAddress` from `127.0.0.1` to the server's ip address you want to connect to (you can also just add a command line arguement for it by supporting -
+```cpp
+if(argc > 2){
+   kServerAddress = argv[2];
+}
+```
+
 - How do you change the code to send to a IPv6 address instead of IPv4?
+- Answer: First of all you need to change `AF_INET` to `AF_INET6`, `struct sockaddr_in` to `struct sockaddr_in6`, `sin_addr` to `sin6_addr`, `sin_port` to `sin6_port`. IPv6 address are 128 bit so seperate structs/APIs are used for them.
+  
 - **Bonus**: How do you change the client code to connect by hostname instead
   of IP address?
+- Answer: (Answering as per I read in beej's guide) When we don't have an IP address we can use `getaddrinfo()` which resolves hostname into socket address structures (it provides a linked list on addresses). Through which we can iterate and try to connect. 
   
 ## Introduction to Memory Management
 

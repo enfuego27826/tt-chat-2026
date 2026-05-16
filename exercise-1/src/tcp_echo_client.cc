@@ -8,12 +8,14 @@
 
 int main(int argc, char* argv[]) {
   // #Question - are these the same type?
+  // No, message is a std::string while argv[1] is a C style string 
+  // (char*), but std::string can implicitly construct/assign from it.
   std::string message = "Hello from client";
 
   if(argc > 1){
     message = argv[1];
   }
-  
+
   const int kPort = 8080;
   const std::string kServerAddress = "127.0.0.1";
   sockaddr_in address;

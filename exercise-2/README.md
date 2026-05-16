@@ -25,22 +25,56 @@
 - [C++23 ISO standard draft](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2023/n4950.pdf) - 
   Working draft of the C++ language specification
 - Is the above the official C++23 spec? 
+- Answer: No, it is a working draft of the C++23 standard and not the final officially published ISO document.
+
 - Where is the official C++23 spec?
+- Answer: The official C++ standard is published by ISO and usually requires purchasing/access through ISO's website.
+
 - Why was this link chosen instead?
+- Answer: The working drafts are publicly accessible for free and are extremely close to the final standard.
+
 - Is this a helpful reference for learning C++?
+- Answer: Not really for beginners. The standard is more of a formal technical/legal specification rather than a tutorial. 
+
 - Can the various implementations of C++ compilers be different from the
   C++ standard?
+- Answer: Yes, compilers can differ in implementation details, optimization behavior, although they generally try to follow the ISO standard closely.
+
 - What are the most widely used and most significant C++ compilers?
+- Answer: GCC, Clang and MSVC are the most widely used and significant C++ compilers.
+
 - Where is the equivalent spec for C++26?
+- Answer: Similar working drafts for C++26 can be found on the WG21 website where ongoing proposals and draft standards are published.
 
 - Where do you find the spec for the HTTP protocol?
+- Answer: The HTTP protocol specifications are published as RFC docs by the IETF.
+
 - What about HTTPS? Is there a spec for that protocol?
+- Answer: Yes there's a spec. HTTPS is essentially HTTP running over TLS (Transport Layer Security), so its specification comes from both the HTTP RFCs and the TLS RFCs.
 
 ## Introduction to C++ and Sockets Programming
 
 - Read the code in `src/`
 - Are there any bugs in this code? 
+- Answer:
+  - `sockaddr_in address;` was not zero initialized which could leave garbage bytes in memory, so it was fixed using `sockaddr_in address{}`.
+  
+  - The code directly printed `buffer` even though `read()` does not guarantee null termination. This was fixed using `std::string(buffer, read_size)` and `append(buffer, read_size)`.
+  
+  - `send()` was unchecked earlier even though TCP can do partial sends. This was fixed by implementing `send_all()` which keeps sending until the whole message is sent.
+  
+  - The code assumed one `read()` call means one full message which is incorrect since TCP is a byte stream. This was fixed by implementing `read_all()` using '\n' as a delimiter. This made an assumption that message can't have '\n' but we need a delimiter so that's why I went with that choice.
+  
+  - Helper functions were directly calling `exit()` which prevented callers from handling errors properly. This was improved using `bool` returns and `std::optional`.
+  
+  - `std::optional` was used in functions like `create_address()` and `read_all()` to clearly represent possible failure cases.
+  
+  - The server reused the same `sockaddr_in` inside `accept()` which gets overwritten with client data. This was fixed using a separate `client_address`.
+  
+  - Some early returns leaked sockets. This was fixed by explicitly calling `close()` before returning on failure.
+  
 - What can you do to identify if there are bugs in the code?
+- Answer: Reading compiler warnings carefully, having several tests, testing edge cases, using debugging tools like `gdb`, sanitizers like `-fsanitize=address`/`-fsanitize=undefined` and carefully addressing memory/resource handling are some of the best ways to identify bugs in code.
 
 ## Refactoring: Extract Function
 

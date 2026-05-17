@@ -21,12 +21,17 @@ Before you scroll down to the questions, try this:
 3. **Reflect on how it went.** Honestly:
    - Did your self-directed learning actually prepare you for the questions, or
      did you over-study things that never came up?
+   - Answer: For most of the things here, I already knew them since I did a compiler design course so I knew about makefiles, g++ CLI, about networks stuff, I read beej's guide to network programming and it turned out to be good enough, I also saw some helpful websites (like geeks for geeks) and medium blogs. It turned out to be pretty good! I wasn't over prepared neither under prepared, it was more like I understood the internals, now yes I will try to think intuitively according to the internals and try to answer according to them.
+
    - Which questions blindsided you? Why — was the topic missing from your
      plan, or did you skim past it?
+   - Answer: Thankfully nothing here :), I have done enough mistakes in my past that I mindfully try to grasp anything I do and it turned out to be a pretty good attempt here.
+
    - Map your experience onto the *known knowns / known unknowns / unknown
      unknowns* idea. The interesting category is usually the last one: things
      you didn't even realise you should have learned. What were yours, and how
      could a better learning plan have surfaced them earlier?
+   - Answer: Half of the things I know actually origin from the last category (not the stuff asked here!). From multi-agent systems, llm security, functional programming, a bit of hardware verification stuff and I believe its better to just dive deep for some time into a rabbit hole but the important part is coming back. Fortunately here whatever I read (from the resources mentioned above) and knew previously from all my coursework was enough. 
 
 The point of this exercise isn't to get the questions "right" — it's to notice
 the gap between how you *think* you learn and how you actually do, so you can
@@ -37,8 +42,13 @@ close it.
 - Answer the following questions in this file and commit and push your changes.
 - Bonus sections are more difficult and optional.
 - How can you find the information required to complete these tasks?
+- Answer: First of all see all the reading material on the provided notion page and read them according to their similarity scores! Then googling always helps, you'll always find something helpful there and now that ai mode does really good web scraping and summarizing you can rely on it, reddit is a really good platform when you need to find actual useful resources (ironically it is). 
+
 - How can you tell if the source of your information is good?
+- Answer: I think reliability of source is one of the first things to check. After that, practical verification matters a lot to me, if the concepts from the source actually match the behavior I observe while experimenting, it is usually a good sign. Good sources also explain why something works instead of just giving steps to copy paste. Comparing multiple sources and checking official docs also helps verify correctness.
+
 - How would you define "good" in this situation?
+- Answer: In this situation I would define a good source as something that is reliable, technically correct, practically verifiable and explains the reasoning behind concepts instead of just giving instructions to follow blindly.
 
 ## Learn Basics of g++ CLI
 

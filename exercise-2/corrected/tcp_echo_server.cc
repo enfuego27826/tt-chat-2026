@@ -7,8 +7,6 @@
 #include <string>
 #include "socket_utils.hpp"
 
-const int kBufferSize = 1024;
-
 bool set_socket_options(int sock, int opt) {
   if(setsockopt(sock, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt,
                  sizeof(opt)) < 0) {
@@ -62,9 +60,7 @@ bool start_listening_on_socket(int my_socket, sockaddr_in &address) {
 }
 
 void handle_accept(int client_socket) {
-  char buffer[kBufferSize] = {0};
-
-  auto received = read_all(client_socket, buffer, kBufferSize);
+  auto received = read_all(client_socket);
 
   if(!received) {
     close(client_socket);

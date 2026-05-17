@@ -40,12 +40,8 @@ bool connect_to_server(int sock, sockaddr_in &server_address) {
 }
 
 void send_and_receive_message(int sock, const std::string &message) {
-  const int kBufferSize = 1024;
-  // #Question - is buffer the best name we can use?
-  char buffer[kBufferSize] = {0};
-
   // Send the message to the server
-  if(!send_all(sock, message+ "\n")) {
+  if(!send_all(sock, message + "\n")) {
     std::cerr << "Error in sending message!" << "\n";
     return;
   }
@@ -53,7 +49,7 @@ void send_and_receive_message(int sock, const std::string &message) {
   std::cout << "Sent: " << message << "\n";
 
   // Receive response from the server
-  auto received = read_all(sock,buffer,kBufferSize);
+  auto received = read_all(sock);
 
   if(!received){
     return; 

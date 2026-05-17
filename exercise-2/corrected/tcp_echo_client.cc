@@ -7,14 +7,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <optional>
+#include "socket_utils.hpp"
 
-int create_socket() {
-  int sock = socket(AF_INET, SOCK_STREAM, 0);
-  if (sock < 0) {
-    return -1;
-  }
-  return sock;
-}
 
 bool set_binary_address(sockaddr_in &address, const std::string &server_ip) {
   if (inet_pton(AF_INET, server_ip.c_str(), &address.sin_addr) <= 0) {
@@ -43,51 +37,6 @@ bool connect_to_server(int sock, sockaddr_in &server_address) {
   }
 
   return true;
-}
-
-bool send_all(int sock, const std::string &message){
-  size_t total_sent = 0;
-
-  while(total_sent < message.size()){
-    ssize_t send_size = send(sock, message.c_str()+total_sent,
-                            message.size()-total_sent,0);
-
-    if(send_size <= 0){
-      return false;
-    }
-
-    total_sent += send_size;
-  }
-
-  return true;
-}
-
-std::optional<std::string> read_all(int sock, char* buffer, int kBufferSize){
-  std::string received;
-
-  while(true){
-    ssize_t read_size = read(sock,buffer,kBufferSize);
-
-    if(read_size == 0) {
-      std::cout << "Server closed connection.\n";
-      return std::nullopt;
-    }
-
-    if(read_size < 0){
-      std::cerr << "Read error \n";
-      return std::nullopt;
-    }
-
-    received.append(buffer,read_size);
-
-    auto pos = received.find('\n');
-    if(pos != std::string::npos){ 
-      received.erase(pos);
-      break;
-    }
-  }
-
-  return received;
 }
 
 void send_and_receive_message(int sock, const std::string &message) {

@@ -25,6 +25,7 @@
 - [C++23 ISO standard draft](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2023/n4950.pdf) - 
   Working draft of the C++ language specification
 - Is the above the official C++23 spec? 
+<<<<<<< HEAD
 - Answer: No, it is a working draft of the C++23 standard and not the final officially published ISO document.
 
 - Where is the official C++23 spec?
@@ -51,11 +52,24 @@
 
 - What about HTTPS? Is there a spec for that protocol?
 - Answer: Yes there's a spec. HTTPS is essentially HTTP running over TLS (Transport Layer Security), so its specification comes from both the HTTP RFCs and the TLS RFCs.
+=======
+- Where is the official C++23 spec?
+- Why was this link chosen instead?
+- Is this a helpful reference for learning C++?
+- Can the various implementations of C++ compilers be different from the
+  C++ standard?
+- What are the most widely used and most significant C++ compilers?
+- Where is the equivalent spec for C++26?
+
+- Where do you find the spec for the HTTP protocol?
+- What about HTTPS? Is there a spec for that protocol?
+>>>>>>> upstream/main
 
 ## Introduction to C++ and Sockets Programming
 
 - Read the code in `src/`
 - Are there any bugs in this code? 
+<<<<<<< HEAD
 - Answer:
   - `sockaddr_in address;` was not zero initialized which could leave garbage bytes in memory, so it was fixed using `sockaddr_in address{}`.
   
@@ -122,10 +136,39 @@
 
 - How can you use `git tag` and `git branch` to make programming easier and more fun?
 - Answer: Branches make it easy to experiment with features/fixes without breaking the main codebase, while tags are useful for saving stable milestones (just how you save tactically in games) so you can always go back and compare progress later.
+=======
+- What can you do to identify if there are bugs in the code?
+
+## Refactoring: Extract Function
+
+- What is different in this code compared to exercise-1?
+- Is this code better or worse than exercise-1?
+- What are the tradeoffs compared to exercise-1?
+- Are you able to spot any mistakes or inconsistencies in the changes?
+  
+## Thinking About Performance
+
+- Does writing code this way have any impact on performance?
+- What do we mean when we say performance?
+- How do we measure performance in a program?
+
+## Play with Git
+
+- There isn't necessarily a single correct answer for how to abstract the 
+  code from exercise-1 into functions
+- Try different ways to refactor the code from exercise-1 to make it more
+  readable.
+- Make sure to commit each change as small and self-contained commit
+- This will make it easier to revert your code if you need to
+- What is `git tag`? How is `git tag` different from `git branch`?
+- How can you use `git tag` and `git branch` to make programming easier and
+  more fun?
+>>>>>>> upstream/main
 
 ## Learn Basics of Debugging in Your IDE
 
 - How do you enable debug mode in your IDE?
+<<<<<<< HEAD
 - Answer: In vs code you can open the Run and Debug panel (`Ctrl + Shift + D`) and either press `F5` or create a `launch.json` configuration to start debugging.
 
 - In debug mode, how do you add a watch?
@@ -136,11 +179,20 @@
 
 - In debug mode, how do you step through code?
 - Answer: vs code provides controls like Step Over (`F10`), Step Into (`F11`), Step Out (`Shift + F11`) and Continue (`F5`) to move through the code while debugging.
+=======
+- In debug mode, how do you add a watch?
+- In debug mode, how do you add a breakpoint?
+- In debug mode, how do you step through code?
+>>>>>>> upstream/main
 
 ### Memory Management and Debug Mode in Your IDE
 
 - How do you see the memory layout of a `std::string` from your IDE debug mode?
+<<<<<<< HEAD
 - Answer: In VS Code debug mode I can put a breakpoint, expand the `std::string` variable inside the Variables panel and inspect its internal fields like `_M_local_buf`, `_M_dataplus`, `_M_string_length`, etc.. I can also use watches/debug console expressions like `message.c_str()` to inspect the raw character buffer and observe things like Small String Optimization (SSO).
 
 - How do you see the memory layout of a struct from your IDE debug mode?
 - Answer: In VS Code debug mode I can put a breakpoint and expand the struct variable inside the Variables panel to inspect all its fields and nested members. I can also use watch with pointers like `&my_struct` to inspect raw memory more directly if needed.
+=======
+- How do you see the memory layout of a struct from your IDE debug mode?
+>>>>>>> upstream/main

@@ -72,6 +72,9 @@ std::string read_args(int argc, char *argv[]) {
 }
 
 int main(int argc, char *argv[]) {
+  std::cout << "argc = " << argc << '\n';
+  for (int i = 0; i < argc; i++)
+    std::cout << argv[i] << '\n';
   const int kPort = 8080;
   const std::string kServerAddress = "127.0.0.1";
 

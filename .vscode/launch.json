@@ -5,12 +5,12 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch without Debug",
+      "name": "Debug Client",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/build/tcp_echo_server",
-      "args": [],
-      "stopAtEntry": false,
+      "program": "${workspaceFolder}/build/client",
+      "args": ["hello"],
+      "stopAtEntry": true,
       "cwd": "${workspaceFolder}",
       "environment": [],
       "externalConsole": false,

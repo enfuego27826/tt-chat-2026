@@ -6,7 +6,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-<<<<<<< HEAD
 int main(int argc, char* argv[]) {
   // #Question - are these the same type?
   // No, message is a std::string while argv[1] is a C style string 
@@ -17,11 +16,6 @@ int main(int argc, char* argv[]) {
     message = argv[1];
   }
 
-=======
-int main() {
-  // #Question - are these the same type?
-  std::string message = "Hello from client";
->>>>>>> upstream/main
   const int kPort = 8080;
   const std::string kServerAddress = "127.0.0.1";
   sockaddr_in address;

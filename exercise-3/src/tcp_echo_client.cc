@@ -22,7 +22,7 @@ int create_socket() {
 
 void set_binary_address(sockaddr_in &address, const std::string &server_ip) {
   auto err_code = inet_pton(AF_INET, server_ip.c_str(), &address.sin_addr);
-  check_error(err_code <= 0, "Invalid address/ Address not supported\n");
+  check_error(err_code <= 0, "Invalid address/Address not supported\n");
 }
 
 sockaddr_in create_address(const std::string &server_ip, int port) {
@@ -45,17 +45,18 @@ void send_and_receive_message(int sock, const std::string &message) {
   char buffer[kBufferSize] = {0};
 
   // Send the message to the server
-  send(sock, message.c_str(), message.size(), 0);
+  ssize_t send_size = send(sock, message.c_str(), message.size(), 0);
+  check_error(send_size < 0, "Send failed\n");
   std::cout << "Sent: " << message << "\n";
 
   // Receive response from the server
   ssize_t read_size = read(sock, buffer, kBufferSize);
+  check_error(read_size < 0, "Read error\n");
+  
   if (read_size > 0) {
     std::cout << "Received: " << buffer << "\n";
   } else if (read_size == 0) {
     std::cout << "Server closed connection.\n";
-  } else {
-    std::cerr << "Read error\n";
   }
 }
 
@@ -85,6 +86,7 @@ int main(int argc, char *argv[]) {
 
   connect_to_server(my_socket, server_address);
   send_and_receive_message(my_socket, message);
+  
   close(my_socket);
 
   return 0;
